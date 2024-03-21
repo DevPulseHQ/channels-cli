@@ -74,6 +74,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     println!("Target: {}", config.target);
 
     events::listen_and_forward_events(config).await?;
+
     Ok(())
 }
 
@@ -92,9 +93,8 @@ mod tests {
         let test_config_path = "tests/test_config.yml"; // Adjust the path as necessary
         let expected_config = config::Config {
             api_key: "test_api_key".to_string(),
-            channel: "http://localhost:3099/v1/channels/2dyxqmRqgYfP4uZiiUadVrbqccN/events"
-                .to_string(),
-            target: "http://localhost:3099/v1/channels/2dyyNxmy2hmaAnvjWWOzWfQtY6v".to_string(),
+            channel: "http://example.com/channel/events".to_string(),
+            target: "http://example.com/channel".to_string(),
         };
 
         let config = load_config_from_file(test_config_path).unwrap();
