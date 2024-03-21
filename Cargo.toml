@@ -1,0 +1,16 @@
+[package]
+name = "devpulse-channels-cli"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+reqwest = { version = "0.11", features = ["json", "stream"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1", features = ["full"] }
+clap = "3.0"
+serde_yaml = "0.8"
+log = "0.4"
+env_logger = "0.9"
+futures = "0.3"

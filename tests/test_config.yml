@@ -1,0 +1,3 @@
+api_key: test_api_key
+channel: http://localhost:3099/v1/channels/2dyxqmRqgYfP4uZiiUadVrbqccN/events
+target: https://en19sznc9uw1r.x.pipedream.net/
