@@ -1,8 +1,14 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct Config {
+pub struct AppConfig {
     pub api_key: String,
-    pub channel: String,
+    pub channels: Vec<ChannelConfig>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct ChannelConfig {
+    pub name: String,
+    pub channel_id: String,
     pub target: String,
 }

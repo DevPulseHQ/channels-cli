@@ -1,0 +1,8 @@
+api_key: test_api_key
+channels:
+  - name: channel
+    channel_id: 2e1uOvaVx7GI0UX12aMSEP8YQLF
+    target: http://example.com/channel
+  - name: channel2
+    channel_id: 2e1uOvaVx7GI0UX12aMSEP8YQLF
+    target: http://example.com/channel/2
