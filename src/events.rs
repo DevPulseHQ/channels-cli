@@ -56,13 +56,13 @@ async fn listen_and_forward_for_channel(
     let client = Client::builder().default_headers(headers).build()?;
 
     let mut channel_url = format!(
-        "https://api.channels.devpulsehq.com/v1/channels{}/events",
+        "https://api.channels.devpulsehq.com/v1/channels/{}/events",
         channel_config.channel_id
     );
 
     if ENVIRONMENT.eq("development") {
         channel_url = format!(
-            "http://localhost:3099/v1/channels{}/events",
+            "http://localhost:3099/v1/channels/{}/events",
             channel_config.channel_id
         );
     }
