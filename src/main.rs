@@ -29,7 +29,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     let matches = App::new("Devpulse Channels")
         .version("1.0")
-        .author("Your Name")
+        .author("Devpulse Team")
         .about("Listens to multiple channels for events and forwards them locally")
         .arg(
             Arg::with_name("config")
@@ -48,10 +48,11 @@ async fn main() -> Result<(), Box<dyn Error>> {
         return Ok(());
     }
 
-    let config_path = matches.value_of("config").unwrap_or("config.yml");
+    let config_path = matches.value_of("config").unwrap_or("channels-config.yml");
     if !Path::new(config_path).exists() {
         return Err(
-            "Config file not found. Use 'init' command to create a default config file.".into(),
+            "Config file not found. Use 'init' command to create a default channels-config file."
+                .into(),
         );
     }
 
@@ -72,7 +73,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
 }
 
 fn create_default_config_file() -> Result<(), Box<dyn Error>> {
-    let path = "config.yml";
+    let path = "channels-config.yml";
     let mut file = File::create(path)?;
     let contents = "api_key: \"your_api_key_here\"\nchannels:\n  - name: \"Example Channel\"\n    channel_id: \"channel_id_here\"\n    target: \"localhost:3000\"";
     file.write_all(contents.as_bytes())?;
