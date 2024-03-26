@@ -1,0 +1,55 @@
+name: Rust Release
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build-and-release:
+    name: Build and Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetches all history for .git and tags
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Build Release
+        run: |
+          cargo build --release
+          strip ./target/release/devpulse_channels
+      - name: Get the version
+        id: get_version
+        run: echo "RELEASE_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+
+      - name: Compress Release Binary
+        run: |
+          tar czvf devpulse_channels-${{ env.RELEASE_VERSION }}.tar.gz -C ./target/release devpulse_channels
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.RELEASE_VERSION }}
+          release_name: Release ${{ env.RELEASE_VERSION }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./target/release/devpulse_channels
+          asset_name: devpulse_channels-${{ env.RELEASE_VERSION }}.tar.gz
+          asset_content_type: application/octet-stream
