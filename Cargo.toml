@@ -3,7 +3,6 @@ name = "devpulse-channels-cli"
 version = "0.1.0"
 edition = "2021"
 
-
 [dependencies]
 reqwest = { version = "0.11", features = ["json", "stream"] }
 serde = { version = "1.0", features = ["derive"] }
@@ -15,3 +14,7 @@ log = "0.4"
 env_logger = "0.9"
 futures = "0.3"
 lazy_static = "1.4.0"
+
+[[bin]]
+name = "devpulse-channels"
+path = "src/main.rs"
