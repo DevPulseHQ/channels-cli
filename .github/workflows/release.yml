@@ -27,14 +27,14 @@ jobs:
       - name: Build Release
         run: |
           cargo build --release
-          strip ./target/release/devpulse-channels
+          strip ./target/release/channels-cli
       - name: Get the version
         id: get_version
         run: echo "RELEASE_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
       - name: Compress Release Binary
         run: |
-          tar czvf devpulse-channels-${{ env.RELEASE_VERSION }}.tar.gz -C ./target/release devpulse-channels
+          tar czvf channels-cli-${{ env.RELEASE_VERSION }}.tar.gz -C ./target/release channels-cli
 
       - name: Create Release
         id: create_release
@@ -53,6 +53,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./target/release/devpulse-channels
-          asset_name: devpulse-channels-${{ env.RELEASE_VERSION }}.tar.gz
+          asset_path: ./channels-cli-${{ env.RELEASE_VERSION }}.tar.gz
+          asset_name: channels-cli-${{ env.RELEASE_VERSION }}.tar.gz
           asset_content_type: application/octet-stream

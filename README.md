@@ -2,7 +2,7 @@
 
 ## Installation
 
-Visit channels.devpulsehq.com for more information on how to set this up.
+Visit [https://channels.devpulsehq.com] for more information on how to create local webhook channels.
 
 ## Usage
 

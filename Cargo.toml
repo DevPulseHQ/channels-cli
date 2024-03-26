@@ -14,7 +14,3 @@ log = "0.4"
 env_logger = "0.9"
 futures = "0.3"
 lazy_static = "1.4.0"
-
-[[bin]]
-name = "devpulse-channels"
-path = "src/main.rs"
