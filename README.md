@@ -13,3 +13,9 @@ channels-cli --help
 ## License
 
 MIT
+
+### Development
+
+```bash
+-LOG_LEVEL=info cargo run -- --config=tests/config.yml
+```
