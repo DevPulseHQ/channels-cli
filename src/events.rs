@@ -3,7 +3,7 @@ use crate::{
     ENVIRONMENT,
 };
 use futures::stream::StreamExt;
-use log::{error, info};
+use log::{debug, error, info};
 use reqwest::{
     header::{HeaderMap, HeaderName, HeaderValue},
     Client,
@@ -60,6 +60,7 @@ async fn listen_and_forward_for_channel(
         channel_config.channel_id
     );
 
+    // yeah this could be better. but so could a lot of things in life.
     if ENVIRONMENT.eq("development") {
         channel_url = format!(
             "http://localhost:3099/v1/channels/{}/events",
@@ -117,7 +118,7 @@ async fn listen_and_forward_for_channel(
                     .collect();
 
                 // log the event payload
-                info!("Event payload: {:?}", event.payload);
+                debug!("Event payload: {:?}", event.payload);
 
                 match client
                     .post(&channel_config.target)

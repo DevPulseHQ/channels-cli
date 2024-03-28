@@ -20,9 +20,8 @@ lazy_static! {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-    if let Ok(log_level) = env::var("LOG_LEVEL") {
-        env::set_var("RUST_LOG", log_level);
-    }
+    let log_level = env::var("LOG_LEVEL").unwrap_or_else(|_| "info".to_string());
+    env::set_var("RUST_LOG", &log_level);
 
     env_logger::init();
     log::info!("Starting Devpulse Channels CLI Tool");
